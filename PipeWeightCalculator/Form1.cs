@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using PipeWeightCalculator.Calculations;
 
 namespace PipeWeightCalculator
 {
@@ -16,16 +17,17 @@ namespace PipeWeightCalculator
     {
         SqlConnection connection;
         string connectionString;
-        public Form1()
+        private readonly IPipe pipe;
+        public Form1(IPipe pipe)
         {
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+            this.pipe = pipe;
         }
-        double pi = Math.PI;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             PopulateDatabase();
-  
         }
 
         public void PopulateDatabase()
@@ -63,41 +65,16 @@ namespace PipeWeightCalculator
 
         private void calculateButton1_Click(object sender, EventArgs e)
         {
-            double pipeNominalDiameterComboBoxValue = (double)pipeNominalDiameterComboBox.SelectedValue;
-            double wallThicknessComboBoxValue = (double)wallThicknessComboBox.SelectedValue;
-            double pipeLength1 = Convert.ToDouble(pipeLengthTextBox1.Text);
-            int materialComboBoxValue = Convert.ToInt32(materialComboBox.SelectedValue);
-            double pipeMassResult1 = Math.Pow((pipeNominalDiameterComboBoxValue / 1000) / 2, 2);
-            if (wallThicknessComboBoxValue > pipeNominalDiameterComboBoxValue || wallThicknessComboBoxValue > pipeNominalDiameterComboBoxValue / 2)
-            {
-                MessageBox.Show("Pipe wall thickness cannot be larger or equal to the half of the outside diameter! Incorrect action!");
-            }
-            else
-            {
-                double pipeMassResult2 = Math.Pow(((pipeNominalDiameterComboBoxValue / 1000) - 2 * (wallThicknessComboBoxValue / 1000)) / 2, 2);
-                double pipeMassResult = (pi * (pipeMassResult1 - pipeMassResult2) * pipeLength1) * materialComboBoxValue;
-                pipeMassResultLabel1.Text = pipeMassResult.ToString("N3");
-            }
+            string result = pipe.CalculatePipeWeight((double)pipeNominalDiameterComboBox.SelectedValue, (double)wallThicknessComboBox.SelectedValue,
+                                    Convert.ToDouble(pipeLengthTextBox1.Text), Convert.ToInt32(materialComboBox.SelectedValue));
+            pipeMassResultLabel1.Text = result;
         }
 
         private void calculateButton2_Click(object sender, EventArgs e)
         {
-            double pipeNominalDiameter = Convert.ToDouble(pipeNominalDiameterTextBox.Text);
-            double wallThickness = Convert.ToDouble(wallThicknessTextBox.Text);
-            double pipeLength2 = Convert.ToDouble(pipeLengthTextBox.Text);
-            int materialComboBoxValue = Convert.ToInt32(materialComboBox.SelectedValue); //Ta wartość pobiera z comboBox.
-            double pipeMassResult1 = Math.Pow((pipeNominalDiameter / 1000) / 2, 2);
-
-            if (wallThickness > pipeNominalDiameter || wallThickness == pipeNominalDiameter / 2)
-            {
-                MessageBox.Show("Pipe wall thickness cannot be larger or equal to the half of the outside diameter! Incorrect action!");
-            }
-            else
-            {
-                double pipeMassResult2 = Math.Pow(((pipeNominalDiameter / 1000) - 2 * (wallThickness / 1000)) / 2, 2);
-                double pipeMassResult = (pi * (pipeMassResult1 - pipeMassResult2) * pipeLength2) * materialComboBoxValue;
-                pipeMassResultLabel2.Text = pipeMassResult.ToString("N3");
-            }
+            string result = pipe.CalculatePipeWeight(Convert.ToDouble(pipeNominalDiameterTextBox.Text), Convert.ToDouble(wallThicknessTextBox.Text),
+                                                    Convert.ToDouble(pipeLengthTextBox.Text), Convert.ToInt32(materialComboBox.SelectedValue));
+            pipeMassResultLabel2.Text = result;
         }
 
         private void pipeNominalDiameterTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -149,3 +126,5 @@ namespace PipeWeightCalculator
         }
     }
 }
+
+

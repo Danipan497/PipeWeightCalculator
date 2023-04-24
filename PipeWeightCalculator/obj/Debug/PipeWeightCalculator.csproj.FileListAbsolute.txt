@@ -20,3 +20,10 @@ C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\obj\Debug
 C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\obj\Debug\PipeWeightCalculator.csproj.CopyComplete
 C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\obj\Debug\PipeWeightCalculator.exe
 C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\obj\Debug\PipeWeightCalculator.pdb
+C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\bin\Debug\FluentAssertions.dll
+C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\bin\Debug\FluentAssertions.pdb
+C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\bin\Debug\FluentAssertions.xml
+C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Daniel\source\repos\PipeWeightCalculator\PipeWeightCalculator\bin\Debug\System.Threading.Tasks.Extensions.xml

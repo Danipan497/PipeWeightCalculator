@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JVZX2955dj+6qBJarHTeQDOEOIk3pO0XFOl9hlwfuxbhxHbW3csYTJbvJnNeqw+Epp8/cgCWQ0V5rpsk7VmpVg==",
+  "dgSpecHash": "3lPBpDJjFsL1j+2rkxKZKXDYh7jDUbiCSNr0+itO/YQgzIa2acyzaabdszHJl0J+O9e+t+SYQzqgMHu9H11BZw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Daniel\\source\\repos\\PipeWeightCalculator\\PipeWeightCalculator.UnitTests\\PipeWeightCalculator.UnitTests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Daniel\\.nuget\\packages\\fluentassertions\\6.11.0\\fluentassertions.6.11.0.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.codecoverage\\17.5.0\\microsoft.codecoverage.17.5.0.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.net.test.sdk\\17.5.0\\microsoft.net.test.sdk.17.5.0.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
@@ -14,7 +15,9 @@
     "C:\\Users\\Daniel\\.nuget\\packages\\nuget.frameworks\\5.11.0\\nuget.frameworks.5.11.0.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",
     "C:\\Users\\Daniel\\.nuget\\packages\\nunit3testadapter\\4.4.2\\nunit3testadapter.4.4.2.nupkg.sha512",
-    "C:\\Users\\Daniel\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512"
+    "C:\\Users\\Daniel\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.0\\system.configuration.configurationmanager.4.4.0.nupkg.sha512",
+    "C:\\Users\\Daniel\\.nuget\\packages\\system.reflection.metadata\\1.6.0\\system.reflection.metadata.1.6.0.nupkg.sha512",
+    "C:\\Users\\Daniel\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.4.0\\system.security.cryptography.protecteddata.4.4.0.nupkg.sha512"
   ],
   "logs": []
 }
