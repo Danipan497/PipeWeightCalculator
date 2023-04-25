@@ -28,8 +28,8 @@ namespace PipeWeightCalculator
         private void Form1_Load(object sender, EventArgs e)
         {
             PopulateDatabase();
+        //testingbranch
         }
-
         public void PopulateDatabase()
         {
             using (connection = new SqlConnection(connectionString))
