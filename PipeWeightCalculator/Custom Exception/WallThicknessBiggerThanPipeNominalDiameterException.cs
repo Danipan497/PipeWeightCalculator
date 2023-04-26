@@ -13,7 +13,7 @@ namespace PipeWeightCalculator.Custom_Exception
     {
         public WallThicknessBiggerThanPipeNominalDiameterException()
         {
-          
+
         }
 
         public WallThicknessBiggerThanPipeNominalDiameterException(string message) : base(message)
