@@ -92,6 +92,7 @@
     <Compile Include="CalculationOne.cs" />
     <Compile Include="Calculations\IPipe.cs" />
     <Compile Include="Calculations\Pipe.cs" />
+    <Compile Include="Custom Exception\WallThicknessBiggerThanHalfOfPipeNominalDiameterException.cs" />
     <Compile Include="Custom Exception\WallThicknessBiggerThanPipeNominalDiameterException.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
