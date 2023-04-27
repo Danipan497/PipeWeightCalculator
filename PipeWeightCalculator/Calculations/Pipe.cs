@@ -19,7 +19,6 @@ namespace PipeWeightCalculator.Calculations
             {
                 if (wallThickness > pipeNominalDiameter)
                 {
-                    //return "";
                     throw new WallThicknessBiggerThanPipeNominalDiameterException();
 
                 }
