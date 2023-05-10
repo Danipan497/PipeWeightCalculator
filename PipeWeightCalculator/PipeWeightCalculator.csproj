@@ -94,6 +94,8 @@
     <Compile Include="Calculations\Pipe.cs" />
     <Compile Include="Custom Exception\WallThicknessBiggerThanHalfOfPipeNominalDiameterException.cs" />
     <Compile Include="Custom Exception\WallThicknessBiggerThanPipeNominalDiameterException.cs" />
+    <Compile Include="DatabaseConnection\ConnectionToDatabase.cs" />
+    <Compile Include="DatabaseConnection\ConnectionToDatabaseBase.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

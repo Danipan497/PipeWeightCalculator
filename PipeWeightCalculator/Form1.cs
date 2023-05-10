@@ -10,58 +10,66 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
 using PipeWeightCalculator.Calculations;
+using PipeWeightCalculator.DatabaseConnection;
+using System.Drawing.Text;
+using PipeWeightCalculator.WeightDataSetTableAdapters;
 
 namespace PipeWeightCalculator
 {
     public partial class Form1 : Form
     {
-        SqlConnection connection;
-        string connectionString;
+        //SqlConnection connection;
+        //string connectionString;
         private readonly IPipe pipe;
+        private ConnectionToDatabase connectionToDatabase;
+        DataTable pipesTable = new DataTable();
+
         public Form1(IPipe pipe)
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+            connectionToDatabase = new ConnectionToDatabase();
             this.pipe = pipe;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            PopulateDatabase();
+            //PopulateDatabase();
+            connectionToDatabase.PDatabase();
         }
 
-        public void PopulateDatabase()
-        {
-            using (connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", connection))
-            using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", connection))
-            using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", connection))
-            {
-                connection.Open();
+        //public void PopulateDatabase()
+        //{
+        //    connectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+        //    using (connection = new SqlConnection(connectionString))
+        //    using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", connection))
+        //    using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", connection))
+        //    using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", connection))
+        //    {
+        //        connection.Open();
 
-                DataTable materialsTable = new DataTable();
-                DataTable pipesTable = new DataTable();
-                DataTable wallthicknessTable = new DataTable();
-                adapter.Fill(pipesTable);
-                adapter2.Fill(wallthicknessTable);
-                adapter3.Fill(materialsTable);
+        //        DataTable materialsTable = new DataTable();
+        //        DataTable pipesTable = new DataTable();
+        //        DataTable wallthicknessTable = new DataTable();
+        //        adapter.Fill(pipesTable);
+        //        adapter2.Fill(wallthicknessTable);
+        //        adapter3.Fill(materialsTable);
 
-                pipeNominalDiameterComboBox.DisplayMember = "Name";
-                pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
-                pipeNominalDiameterComboBox.DataSource = pipesTable;
-                pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        //        pipeNominalDiameterComboBox.DisplayMember = "Name";
+        //        pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
+        //        pipeNominalDiameterComboBox.DataSource = pipesTable;
+        //        pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
-                wallThicknessComboBox.DisplayMember = "Name";
-                wallThicknessComboBox.ValueMember = "Wall";
-                wallThicknessComboBox.DataSource = wallthicknessTable;
-                wallThicknessComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        //        wallThicknessComboBox.DisplayMember = "Name";
+        //        wallThicknessComboBox.ValueMember = "Wall";
+        //        wallThicknessComboBox.DataSource = wallthicknessTable;
+        //        wallThicknessComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
-                materialComboBox.DisplayMember = "Name";
-                materialComboBox.ValueMember = "Density";
-                materialComboBox.DataSource = materialsTable;
-                materialComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            }
-        }
+        //        materialComboBox.DisplayMember = "Name";
+        //        materialComboBox.ValueMember = "Density";
+        //        materialComboBox.DataSource = materialsTable;
+        //        materialComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        //    }
+        //}
 
         private void calculateButton1_Click(object sender, EventArgs e)
         {
@@ -73,7 +81,7 @@ namespace PipeWeightCalculator
         private void calculateButton2_Click(object sender, EventArgs e)
         {
             string result = pipe.CalculatePipeWeight(Convert.ToDouble(pipeNominalDiameterTextBox.Text), Convert.ToDouble(wallThicknessTextBox.Text),
-                                                    Convert.ToDouble(pipeLengthTextBox.Text), Convert.ToInt32(materialComboBox.SelectedValue));
+                                    Convert.ToDouble(pipeLengthTextBox.Text), Convert.ToInt32(materialComboBox.SelectedValue));
             pipeMassResultLabel2.Text = result;
         }
 
@@ -123,6 +131,15 @@ namespace PipeWeightCalculator
             {
                 e.Handled = true;
             }
+        }
+
+        private void pipeNominalDiameterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pipeNominalDiameterComboBox.DisplayMember = "Name";
+            pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
+            pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            pipeNominalDiameterComboBox.DataSource = pipesTable;
+            
         }
     }
 }

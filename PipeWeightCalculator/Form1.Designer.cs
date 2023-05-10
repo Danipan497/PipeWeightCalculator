@@ -60,6 +60,7 @@
             this.pipeNominalDiameterComboBox.Name = "pipeNominalDiameterComboBox";
             this.pipeNominalDiameterComboBox.Size = new System.Drawing.Size(250, 28);
             this.pipeNominalDiameterComboBox.TabIndex = 0;
+            this.pipeNominalDiameterComboBox.SelectedIndexChanged += new System.EventHandler(this.pipeNominalDiameterComboBox_SelectedIndexChanged);
             // 
             // wallThicknessComboBox
             // 
@@ -299,10 +300,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox pipeNominalDiameterComboBox;
-        private System.Windows.Forms.ComboBox wallThicknessComboBox;
-        private System.Windows.Forms.ComboBox materialComboBox;
         private System.Windows.Forms.TextBox pipeLengthTextBox1;
         private System.Windows.Forms.Button calculateButton1;
         private System.Windows.Forms.Label pipeMassResultLabel1;
@@ -323,6 +320,9 @@
         private System.Windows.Forms.TextBox wallThicknessTextBox;
         private System.Windows.Forms.TextBox pipeNominalDiameterTextBox;
         private System.Windows.Forms.Button calculateButton2;
+        public System.Windows.Forms.ComboBox pipeNominalDiameterComboBox;
+        public System.Windows.Forms.ComboBox wallThicknessComboBox;
+        public System.Windows.Forms.ComboBox materialComboBox;
     }
 }
 
