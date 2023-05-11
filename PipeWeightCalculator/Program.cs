@@ -1,4 +1,5 @@
 ﻿using PipeWeightCalculator.Calculations;
+using PipeWeightCalculator.DatabaseConnection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,10 @@ namespace PipeWeightCalculator
         static void Main()
         {
             IPipe pipe = new Pipe();
+            IConnectionToDatabase connectionToDatabase = new ConnectionToDatabase();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(pipe));
+            Application.Run(new Form1(pipe, connectionToDatabase));
         }
     }
 }

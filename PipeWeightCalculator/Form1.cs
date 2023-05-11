@@ -13,6 +13,7 @@ using PipeWeightCalculator.Calculations;
 using PipeWeightCalculator.DatabaseConnection;
 using System.Drawing.Text;
 using PipeWeightCalculator.WeightDataSetTableAdapters;
+using System.Reflection;
 
 namespace PipeWeightCalculator
 {
@@ -21,14 +22,13 @@ namespace PipeWeightCalculator
         //SqlConnection connection;
         //string connectionString;
         private readonly IPipe pipe;
-        private ConnectionToDatabase connectionToDatabase;
-        DataTable pipesTable = new DataTable();
-
-        public Form1(IPipe pipe)
+        private readonly IConnectionToDatabase connectionToDatabase;
+        
+        public Form1(IPipe pipe, IConnectionToDatabase connectionToDatabase)
         {
             InitializeComponent();
-            connectionToDatabase = new ConnectionToDatabase();
             this.pipe = pipe;
+            this.connectionToDatabase = connectionToDatabase;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -138,8 +138,8 @@ namespace PipeWeightCalculator
             pipeNominalDiameterComboBox.DisplayMember = "Name";
             pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
             pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            pipeNominalDiameterComboBox.DataSource = pipesTable;
-            
+
+
         }
     }
 }
