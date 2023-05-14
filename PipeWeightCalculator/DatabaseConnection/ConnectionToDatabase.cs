@@ -19,29 +19,29 @@ namespace PipeWeightCalculator.DatabaseConnection
         public SqlConnection cnn;
         string cnnString;
 
-        public void PDatabase()
-        {
-            cnnString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
-            using (cnn = new SqlConnection(cnnString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", cnn))
-            using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", cnn))
-            using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", cnn))
-            {
+        //public void PDatabase()
+        //{
+        //    cnnString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+        //    using (cnn = new SqlConnection(cnnString))
+        //    using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", cnn))
+        //    using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", cnn))
+        //    using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", cnn))
+        //    {
 
 
-                cnn.Open();
+        //        cnn.Open();
 
-                DataTable materialsTable = new DataTable();
-                DataTable pipesTable = new DataTable();
-                DataTable wallthicknessTable = new DataTable();
-                adapter.Fill(pipesTable);
-                adapter2.Fill(wallthicknessTable);
-                adapter3.Fill(materialsTable);
+        //        DataTable materialsTable = new DataTable();
+        //        DataTable pipesTable = new DataTable();
+        //        DataTable wallthicknessTable = new DataTable();
+        //        adapter.Fill(pipesTable);
+        //        adapter2.Fill(wallthicknessTable);
+        //        adapter3.Fill(materialsTable);
 
-            }
-        }
+        //    }
+        //}
 
-        public List<String> JSONDataAll() //Tutaj obczaj czy może być to z JSON.
+        public List<String> pipesTableData() 
         {
             List<String> Pipes = new List<String>();
             cnnString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;

@@ -34,7 +34,8 @@ namespace PipeWeightCalculator
         private void Form1_Load(object sender, EventArgs e)
         {
             //PopulateDatabase();
-            connectionToDatabase.PDatabase();
+            //connectionToDatabase.PDatabase();
+            connectionToDatabase.pipesTableData();
         }
 
         //public void PopulateDatabase()
@@ -138,9 +139,12 @@ namespace PipeWeightCalculator
             pipeNominalDiameterComboBox.DisplayMember = "Name";
             pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
             pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            pipeNominalDiameterComboBox.DataSource = connectionToDatabase.pipesTableData();
 
 
         }
+
+
     }
 }
 
