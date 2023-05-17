@@ -19,23 +19,25 @@ namespace PipeWeightCalculator
 {
     public partial class Form1 : Form
     {
-        //SqlConnection connection;
-        //string connectionString;
         private readonly IPipe pipe;
-        private readonly IConnectionToDatabase connectionToDatabase;
-        
-        public Form1(IPipe pipe, IConnectionToDatabase connectionToDatabase)
+
+        //private readonly IConnectionToDatabase connectionToDatabase;
+        readonly ConnectionToDatabase newConnection = new ConnectionToDatabase();
+        //public Form1(IPipe pipe, IConnectionToDatabase connectionToDatabase)
+
+
+        public Form1(IPipe pipe)
         {
             InitializeComponent();
             this.pipe = pipe;
-            this.connectionToDatabase = connectionToDatabase;
+            //this.connectionToDatabase = connectionToDatabase;
+            newConnection.PDatabase();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //PopulateDatabase();
-            //connectionToDatabase.PDatabase();
-            connectionToDatabase.pipesTableData();
+
         }
 
         //public void PopulateDatabase()
@@ -136,15 +138,14 @@ namespace PipeWeightCalculator
 
         private void pipeNominalDiameterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pipeNominalDiameterComboBox.DisplayMember = "Name";
-            pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
-            pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            pipeNominalDiameterComboBox.DataSource = connectionToDatabase.pipesTableData();
+            //pipeNominalDiameterComboBox.DisplayMember = "Name";
+            //pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
+            //pipeNominalDiameterComboBox.DataSource = newConnection.PDatabase();
+            //pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
 
 
         }
-
-
     }
 }
 

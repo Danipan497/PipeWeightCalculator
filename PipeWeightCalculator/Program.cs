@@ -17,10 +17,11 @@ namespace PipeWeightCalculator
         static void Main()
         {
             IPipe pipe = new Pipe();
-            IConnectionToDatabase connectionToDatabase = new ConnectionToDatabase();
+            //IConnectionToDatabase connectionToDatabase = new ConnectionToDatabase();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(pipe, connectionToDatabase));
+            //Application.Run(new Form1(pipe, connectionToDatabase));
+            Application.Run(new Form1(pipe));
         }
     }
 }

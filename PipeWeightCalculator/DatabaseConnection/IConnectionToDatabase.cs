@@ -9,7 +9,6 @@ namespace PipeWeightCalculator.DatabaseConnection
 {
     public interface IConnectionToDatabase
     {
-        //void PDatabase();
-        List<String> pipesTableData();
+        void PDatabase();
     }
 }
