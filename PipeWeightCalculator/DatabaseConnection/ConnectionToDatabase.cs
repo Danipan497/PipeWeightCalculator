@@ -24,7 +24,6 @@ namespace PipeWeightCalculator.DatabaseConnection
         public string ConnectionString { get; set; }
         public SqlConnection Connection { get; set; }
 
-
         public ConnectionToDatabase(string connectionString, SqlConnection connection)
         {
             this.ConnectionString = connectionString;
@@ -73,3 +72,26 @@ namespace PipeWeightCalculator.DatabaseConnection
         }
     }
 }
+
+        //private DataTable pipesTableTry;
+
+        //public DataTable PipesTableTry
+        //{
+        //    get
+        //    {
+        //        return pipesTableTry;
+        //    }
+        //    set
+        //    {
+        //        connectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+        //        using (connection = new SqlConnection(connectionString))
+        //        using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", connection))
+        //        {
+        //            connection.Open();
+        //            DataTable pipesTable = new DataTable();
+        //            adapter.Fill(pipesTable);
+
+        //            pipesTableTry = pipesTable;
+        //        }
+        //    }
+        //}

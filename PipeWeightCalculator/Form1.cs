@@ -97,7 +97,7 @@ namespace PipeWeightCalculator
 
         private void pipeNominalDiameterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
