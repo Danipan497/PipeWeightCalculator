@@ -13,43 +13,63 @@ using System.Security.Cryptography.X509Certificates;
 using System.Net.Mail;
 using System.Drawing.Text;
 using System.Diagnostics;
+using PipeWeightCalculator.WeightDataSetTableAdapters;
 
 namespace PipeWeightCalculator.DatabaseConnection
 {
     public class ConnectionToDatabase
     {
-        public SqlConnection cnn;
-        string cnnString;
+        //public SqlConnection connection;
+        //string connectionString;
+        public string ConnectionString { get; set; }
+        public SqlConnection Connection { get; set; }
 
-        public void PDatabase()
+
+        public ConnectionToDatabase(string connectionString, SqlConnection connection)
         {
-            cnnString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
-            using (cnn = new SqlConnection(cnnString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", cnn))
-            using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", cnn))
-            using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", cnn))
+            this.ConnectionString = connectionString;
+            this.Connection = connection;
+            GetPipes();
+            GetWallthickness();
+            GetMaterial();
+        }
+
+        public void PopulateDatabase()
+        {
+            ConnectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+        }
+
+        public void GetPipes()
+        {
+            using (Connection = new SqlConnection(ConnectionString))
+            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", Connection))
             {
-
-                cnn.Open();
-
-                DataTable materialsTable = new DataTable();
+                Connection.Open();
                 DataTable pipesTable = new DataTable();
-                DataTable wallthicknessTable = new DataTable();
                 adapter.Fill(pipesTable);
-                adapter2.Fill(wallthicknessTable);
-                adapter3.Fill(materialsTable);
-
-                for (int i = 0; i < pipesTable.Rows.Count; i++)
-                {
-                    var pipesTableRowsName = pipesTable.Rows[i]["Name"].ToString();
-                    var pipesTableRowsNominalDiameter = pipesTable.Rows[i]["NominalDiameter"].ToString();
-                }
             }
         }
 
-        
+        public void GetWallthickness()
+        {
+            using (Connection = new SqlConnection(ConnectionString))
+            using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", Connection))
+            {
+                Connection.Open();
+                DataTable wallthicknessTable = new DataTable();
+                adapter2.Fill(wallthicknessTable);
+            }
+        }
 
-        private string getWallthickness;
-        public string GetWallthickness { get { return getWallthickness; } set { getWallthickness = value; } }
+        public void GetMaterial()
+        {
+            using (Connection = new SqlConnection(ConnectionString))
+            using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", Connection))
+            {
+                Connection.Open();
+                DataTable materialsTable = new DataTable();
+                adapter3.Fill(materialsTable);
+            }
+        }
     }
 }

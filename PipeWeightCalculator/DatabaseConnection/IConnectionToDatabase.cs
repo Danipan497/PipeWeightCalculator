@@ -4,11 +4,14 @@ using System;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace PipeWeightCalculator.DatabaseConnection
 {
     public interface IConnectionToDatabase
     {
-        void PDatabase();
     }
 }
+
+
+

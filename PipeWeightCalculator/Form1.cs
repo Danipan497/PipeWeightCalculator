@@ -20,59 +20,18 @@ namespace PipeWeightCalculator
     public partial class Form1 : Form
     {
         private readonly IPipe pipe;
-
-        //private readonly IConnectionToDatabase connectionToDatabase;
-        readonly ConnectionToDatabase newConnection = new ConnectionToDatabase();
-        //public Form1(IPipe pipe, IConnectionToDatabase connectionToDatabase)
-
-
+        private ConnectionToDatabase connectionToDatabase;
+        
         public Form1(IPipe pipe)
         {
             InitializeComponent();
             this.pipe = pipe;
-            //this.connectionToDatabase = connectionToDatabase;
-            newConnection.PDatabase();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-
-        //public void PopulateDatabase()
-        //{
-        //    connectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
-        //    using (connection = new SqlConnection(connectionString))
-        //    using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", connection))
-        //    using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", connection))
-        //    using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", connection))
-        //    {
-        //        connection.Open();
-
-        //        DataTable materialsTable = new DataTable();
-        //        DataTable pipesTable = new DataTable();
-        //        DataTable wallthicknessTable = new DataTable();
-        //        adapter.Fill(pipesTable);
-        //        adapter2.Fill(wallthicknessTable);
-        //        adapter3.Fill(materialsTable);
-
-        //        pipeNominalDiameterComboBox.DisplayMember = "Name";
-        //        pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
-        //        pipeNominalDiameterComboBox.DataSource = pipesTable;
-        //        pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-
-        //        wallThicknessComboBox.DisplayMember = "Name";
-        //        wallThicknessComboBox.ValueMember = "Wall";
-        //        wallThicknessComboBox.DataSource = wallthicknessTable;
-        //        wallThicknessComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-
-        //        materialComboBox.DisplayMember = "Name";
-        //        materialComboBox.ValueMember = "Density";
-        //        materialComboBox.DataSource = materialsTable;
-        //        materialComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-        //    }
-        //}
 
         private void calculateButton1_Click(object sender, EventArgs e)
         {
@@ -138,12 +97,6 @@ namespace PipeWeightCalculator
 
         private void pipeNominalDiameterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //pipeNominalDiameterComboBox.DisplayMember = "Name";
-            //pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
-            //pipeNominalDiameterComboBox.DataSource = newConnection.PDatabase();
-            //pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-
-
 
         }
     }
