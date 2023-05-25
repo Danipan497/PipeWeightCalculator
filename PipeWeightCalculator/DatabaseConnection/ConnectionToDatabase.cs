@@ -1,57 +1,63 @@
-﻿using PipeWeightCalculator.Calculations;
-using System;
+﻿using PipeWeightCalculator.Dtos;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PipeWeightCalculator.DatabaseConnection;
-using System.Windows.Forms;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Mail;
-using System.Drawing.Text;
-using System.Diagnostics;
-using PipeWeightCalculator.WeightDataSetTableAdapters;
+
 
 namespace PipeWeightCalculator.DatabaseConnection
 {
-    public class ConnectionToDatabase
+    public class ConnectionToDatabase : IConnectionToDatabase
     {
-        //public SqlConnection connection;
-        //string connectionString;
-        public string ConnectionString { get; set; }
-        public SqlConnection Connection { get; set; }
+        private static string connectionString= "PipeWeightCalculator.Properties.Settings.WeightConnectionString";
+        SqlConnection Connection;
+        string ConnectionStringForDatabase;
 
-        public ConnectionToDatabase(string connectionString, SqlConnection connection)
+        public ConnectionToDatabase()
         {
-            this.ConnectionString = connectionString;
-            this.Connection = connection;
-            GetPipes();
-            GetWallthickness();
-            GetMaterial();
+
         }
 
-        public void PopulateDatabase()
+        public PipesPropertiesDto PopulateDatabase()
         {
-            ConnectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+            string ConnectionStringForDatabase = ConfigurationManager.ConnectionStrings[connectionString].ConnectionString;
+
+            var listOfPipes = GetPipes(ConnectionStringForDatabase);
+
+          
+
+            GetWallthickness(ConnectionStringForDatabase);
+            GetMaterial(ConnectionStringForDatabase);
+
+            return new PipesPropertiesDto()
+            {
+                Pipes = listOfPipes,
+
+            };
         }
 
-        public void GetPipes()
+        public List<PipesDto> GetPipes(string connectionStringForDatabase)
         {
-            using (Connection = new SqlConnection(ConnectionString))
+            List<PipesDto> listOfPipes=new List<PipesDto>();
+            using (Connection = new SqlConnection(connectionStringForDatabase))
             using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", Connection))
             {
                 Connection.Open();
                 DataTable pipesTable = new DataTable();
-                adapter.Fill(pipesTable);
+                var filledTable=adapter.Fill(pipesTable); 
+                foreach(var row in pipesTable.Rows)
+                {
+                    
+                    //listOfPipes Mappowanie albo reflexion. Moze convert na json. Dbcontex.
+                }
+                return listOfPipes;
             }
+            
         }
 
-        public void GetWallthickness()
+        public void GetWallthickness(string connectionStringForDatabase)
         {
-            using (Connection = new SqlConnection(ConnectionString))
+            using (Connection = new SqlConnection(connectionStringForDatabase))
             using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", Connection))
             {
                 Connection.Open();
@@ -60,9 +66,9 @@ namespace PipeWeightCalculator.DatabaseConnection
             }
         }
 
-        public void GetMaterial()
+        public void GetMaterial(string connectionStringForDatabase)
         {
-            using (Connection = new SqlConnection(ConnectionString))
+            using (Connection = new SqlConnection(connectionStringForDatabase))
             using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", Connection))
             {
                 Connection.Open();
