@@ -1,4 +1,7 @@
 ﻿using System;
+using PipeWeightCalculator.PipesProperties;
+using PipeWeightCalculator.DataSets;
+using PipeWeightCalculator.Mapping;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +13,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
 using PipeWeightCalculator.Calculations;
+using PipeWeightCalculator.WeightDataSetTableAdapters;
 
 namespace PipeWeightCalculator
 {
@@ -32,35 +36,43 @@ namespace PipeWeightCalculator
 
         public void PopulateDatabase()
         {
-            using (connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", connection))
-            using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", connection))
-            using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", connection))
-            {
-                connection.Open();
+            var pipesTableDataSet = DataSetsGenerator.Pipes();
+            DataNamesMapper<PipeSettings> mapperPipes = new DataNamesMapper<PipeSettings>();
+            List<PipeSettings> pipesList = mapperPipes.Map(pipesTableDataSet.Tables[0]).ToList();
 
-                DataTable materialsTable = new DataTable();
-                DataTable pipesTable = new DataTable();
-                DataTable wallthicknessTable = new DataTable();
-                adapter.Fill(pipesTable);
-                adapter2.Fill(wallthicknessTable);
-                adapter3.Fill(materialsTable);
+            pipeNominalDiameterComboBox.DataSource = pipesList;
+            pipeNominalDiameterComboBox.DisplayMember = "Name";
+            pipeNominalDiameterComboBox.ValueMember = "nominaldiameter";
 
-                pipeNominalDiameterComboBox.DisplayMember = "Name";
-                pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
-                pipeNominalDiameterComboBox.DataSource = pipesTable;
-                pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            //using (connection = new SqlConnection(connectionString))
 
-                wallThicknessComboBox.DisplayMember = "Name";
-                wallThicknessComboBox.ValueMember = "Wall";
-                wallThicknessComboBox.DataSource = wallthicknessTable;
-                wallThicknessComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            //using (SqlDataAdapter adapter2 = new SqlDataAdapter("SELECT * FROM Wallthickness", connection))
+            //using (SqlDataAdapter adapter3 = new SqlDataAdapter("SELECT * FROM Materials", connection))
+            //{
+            //    connection.Open();
 
-                materialComboBox.DisplayMember = "Name";
-                materialComboBox.ValueMember = "Density";
-                materialComboBox.DataSource = materialsTable;
-                materialComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            }
+            //    DataTable materialsTable = new DataTable();
+
+            //    DataTable wallthicknessTable = new DataTable();
+
+            //    adapter2.Fill(wallthicknessTable);
+            //    adapter3.Fill(materialsTable);
+
+            //    pipeNominalDiameterComboBox.DisplayMember = "Name";
+            //    pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
+
+            //    pipeNominalDiameterComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //    wallThicknessComboBox.DisplayMember = "Name";
+            //    wallThicknessComboBox.ValueMember = "Wall";
+            //    wallThicknessComboBox.DataSource = wallthicknessTable;
+            //    wallThicknessComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            //    materialComboBox.DisplayMember = "Name";
+            //    materialComboBox.ValueMember = "Density";
+            //    materialComboBox.DataSource = materialsTable;
+            //    materialComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            //}
         }
 
         private void calculateButton1_Click(object sender, EventArgs e)
