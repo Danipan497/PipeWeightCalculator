@@ -47,7 +47,7 @@ namespace PipeWeightCalculator.DatabaseConnection
                 var filledTable=adapter.Fill(pipesTable); 
                 foreach(var row in pipesTable.Rows)
                 {
-                    
+                    pipesTable.Rows.Add(row);
                     //listOfPipes Mappowanie albo reflexion. Moze convert na json. Dbcontex.
                 }
                 return listOfPipes;
