@@ -12,23 +12,19 @@ namespace PipeWeightCalculator.DataSets
 {
     public class DataSetsGenerator
     {
-
         public static DataSet Pipes()
         {
-            SqlConnection connection;
-            string connectionString;
-            connectionString = ConfigurationManager.
+            string connectionString = ConfigurationManager.
                 ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+            string queryString = "SELECT * FROM dbo.Pipes";
 
-            using (connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Pipes", connection))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-
-                DataTable pipesTable = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = new SqlCommand(queryString, connection);
 
                 DataSet pipesTableDataSet = new DataSet();
-                pipesTableDataSet.Tables.Add(pipesTable);
+                adapter.Fill(pipesTableDataSet);
 
                 return pipesTableDataSet;
             }
