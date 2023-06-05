@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using PipeWeightCalculator.Calculations;
 using System.Configuration;
+using System.Windows.Forms;
 
 namespace PipeWeightCalculator.DataSets
 {
@@ -21,6 +22,7 @@ namespace PipeWeightCalculator.DataSets
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
+
                 adapter.SelectCommand = new SqlCommand(queryString, connection);
 
                 DataSet pipesTableDataSet = new DataSet();
@@ -29,5 +31,43 @@ namespace PipeWeightCalculator.DataSets
                 return pipesTableDataSet;
             }
         }
+
+        public static DataSet WallThickness()
+        {
+            string connectionString = ConfigurationManager.
+                ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+            string queryString = "SELECT * FROM dbo.Wallthickness";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+
+                adapter.SelectCommand = new SqlCommand(queryString, connection);
+
+                DataSet wallThicknessTableDataSet = new DataSet();
+                adapter.Fill(wallThicknessTableDataSet);
+
+                return wallThicknessTableDataSet;
+            }
+        }
+        public static DataSet Materials()
+        {
+            string connectionString = ConfigurationManager.
+                ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
+            string queryString = "SELECT * FROM dbo.Materials";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+
+                adapter.SelectCommand = new SqlCommand(queryString, connection);
+
+                DataSet materialsTableDataSet = new DataSet();
+                adapter.Fill(materialsTableDataSet);
+
+                return materialsTableDataSet;
+            }
+        }
     }
 }
+
