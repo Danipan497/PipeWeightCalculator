@@ -55,6 +55,7 @@
             // 
             // pipeNominalDiameterComboBox
             // 
+            this.pipeNominalDiameterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pipeNominalDiameterComboBox.FormattingEnabled = true;
             this.pipeNominalDiameterComboBox.Location = new System.Drawing.Point(40, 160);
             this.pipeNominalDiameterComboBox.Name = "pipeNominalDiameterComboBox";
@@ -63,6 +64,7 @@
             // 
             // wallThicknessComboBox
             // 
+            this.wallThicknessComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.wallThicknessComboBox.FormattingEnabled = true;
             this.wallThicknessComboBox.Location = new System.Drawing.Point(40, 260);
             this.wallThicknessComboBox.Name = "wallThicknessComboBox";
@@ -71,6 +73,7 @@
             // 
             // materialComboBox
             // 
+            this.materialComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.materialComboBox.FormattingEnabled = true;
             this.materialComboBox.Location = new System.Drawing.Point(820, 160);
             this.materialComboBox.Name = "materialComboBox";

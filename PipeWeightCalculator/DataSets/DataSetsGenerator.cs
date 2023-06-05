@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using PipeWeightCalculator.Calculations;
 using System.Configuration;
-using System.Windows.Forms;
 
 namespace PipeWeightCalculator.DataSets
 {
@@ -31,7 +24,6 @@ namespace PipeWeightCalculator.DataSets
                 return pipesTableDataSet;
             }
         }
-
         public static DataSet WallThickness()
         {
             string connectionString = ConfigurationManager.

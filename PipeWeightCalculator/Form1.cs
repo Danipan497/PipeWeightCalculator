@@ -3,29 +3,18 @@ using PipeWeightCalculator.PipesProperties;
 using PipeWeightCalculator.DataSets;
 using PipeWeightCalculator.Mapping;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Data.SqlClient;
 using PipeWeightCalculator.Calculations;
-using PipeWeightCalculator.WeightDataSetTableAdapters;
 
 namespace PipeWeightCalculator
 {
     public partial class Form1 : Form
     {
-        SqlConnection connection;
-        string connectionString;
         private readonly IPipe pipe;
         public Form1(IPipe pipe)
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["PipeWeightCalculator.Properties.Settings.WeightConnectionString"].ConnectionString;
             this.pipe = pipe;
         }
 
@@ -41,16 +30,16 @@ namespace PipeWeightCalculator
             List<PipeSettings> pipesList = mapperPipes.Map(pipesTableDataSet.Tables[0]).ToList();
 
             pipeNominalDiameterComboBox.DataSource = pipesList;
-            pipeNominalDiameterComboBox.DisplayMember = "Name";
-            pipeNominalDiameterComboBox.ValueMember = "NominalDiameter";
+            pipeNominalDiameterComboBox.DisplayMember = "name_pipe";
+            pipeNominalDiameterComboBox.ValueMember = "value_pipe";
 
             var materialsTableDataSet = DataSetsGenerator.Materials();
             DataNamesMapper<PipeSettings> mapperMaterials = new DataNamesMapper<PipeSettings>();
             List<PipeSettings> materialsList = mapperMaterials.Map(materialsTableDataSet.Tables[0]).ToList();
 
             materialComboBox.DataSource = materialsList;
-            materialComboBox.DisplayMember = "material_name";
-            materialComboBox.ValueMember = "material_density";
+            materialComboBox.DisplayMember = "name_material";
+            materialComboBox.ValueMember = "value_material";
 
             var wallThicknessTableDataSet = DataSetsGenerator.WallThickness();
             DataNamesMapper<PipeSettings> mapperWallThickness = new DataNamesMapper<PipeSettings>();

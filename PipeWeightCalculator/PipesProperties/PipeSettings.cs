@@ -1,31 +1,26 @@
 ﻿using PipeWeightCalculator.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PipeWeightCalculator.PipesProperties
 {
     public class PipeSettings
     {
-        [DataNames("Id")]
-        public string Id { get; set; }
+        [DataNames("id_pipe")]
+        public string id_pipe { get; set; }
 
-        [DataNames("Name")]
-        public string Name { get; set; }
+        [DataNames("name_pipe")]
+        public string name_pipe { get; set; }
 
-        [DataNames("NominalDiameter")]
-        public string NominalDiameter { get; set; }
+        [DataNames("value_pipe")]
+        public string value_pipe { get; set; }
 
-        [DataNames("id_materials")]
-        public string id_materials { get; set; }
+        [DataNames("id_material")]
+        public string id_material { get; set; }
 
-        [DataNames("material_name")]
-        public string material_name { get; set; }
+        [DataNames("name_material")]
+        public string name_material { get; set; }
 
-        [DataNames("material_density")]
-        public string material_density { get; set; }
+        [DataNames("value_material")]
+        public string value_material { get; set; }
 
         [DataNames("id_wallthickness")]
         public string id_wallthickness { get; set; }
