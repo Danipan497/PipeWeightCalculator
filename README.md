@@ -1,2 +1,4 @@
 # PipeWeightCalculator
- Pipe weight calculator - new version, database connected.
+ Pipe weight calculator:
+ 
+ -Simple version with SQL.
